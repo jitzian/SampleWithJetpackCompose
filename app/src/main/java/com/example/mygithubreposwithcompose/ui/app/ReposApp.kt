@@ -15,7 +15,7 @@ fun ReposApp(content: @Composable () -> Unit){
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            content
+            content()
         }
     }
 }
