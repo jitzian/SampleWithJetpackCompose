@@ -1,15 +1,13 @@
 package com.example.mygithubreposwithcompose.ui.common
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.example.mygithubreposwithcompose.R
@@ -24,7 +22,7 @@ fun Thumb(
     Box(
         modifier = modifier
             .height(dimensionResource(id = R.dimen.cell_thumb_height))
-            .fillMaxWidth(),
+            .width(dimensionResource(id = R.dimen.cell_thumb_height)),
         contentAlignment = Alignment.Center
     ) {
         Image(

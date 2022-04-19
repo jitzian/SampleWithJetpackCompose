@@ -1,16 +1,17 @@
 package com.example.mygithubreposwithcompose.ui.common
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.example.mygithubreposwithcompose.rest.model.ResultApiItem
+import java.util.*
 
 @ExperimentalCoilApi
 @Composable
@@ -23,12 +24,17 @@ fun ItemRow(data: ResultApiItem) {
     ) {
         Row {
             Thumb(data = data)
-            Column(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .fillMaxWidth()
+            ) {
                 Text(
-                    text = "${data.name}",
+                    text = "${data.name?.uppercase(Locale.ROOT)}",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp)
+                        .padding(8.dp),
+                    style = MaterialTheme.typography.subtitle2,
                 )
                 Text(
                     text = "${data.description}",
@@ -36,8 +42,7 @@ fun ItemRow(data: ResultApiItem) {
                         .fillMaxWidth()
                         .padding(8.dp),
                     maxLines = 2,
-
-                    )
+                )
             }
         }
     }
