@@ -40,14 +40,20 @@ class MainViewModel : ViewModel() {
     }
 
     fun getRepos(user: String) = viewModelScope.launch {
+        //TODO: Refactor this in order to handle proper errors like no connectivity..
         withContext(Dispatchers.IO) {
             withTimeout(GlobalConstants.MAX_TIME_OUT) {
                 try {
+                    Log.e(TAG, "getRepos:: OK")
                     _data.value = UIState(
-                        repos = restApi.getRepos(user)
+                        repos = restApi.getRepos(user),
+                        isError = false
                     )
                 } catch (tce: TimeoutCancellationException) {
-                    Log.e(TAG, "getRepos: ${tce.message}")
+                    Log.e(TAG, "getRepos::NOK::${tce.message}")
+                    _data.value = UIState(
+                        isError = true
+                    )
                 }
             }
         }
