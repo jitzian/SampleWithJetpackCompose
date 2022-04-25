@@ -17,8 +17,7 @@ import com.example.mygithubreposwithcompose.R
 import com.example.mygithubreposwithcompose.ui.app.ReposApp
 
 @Composable
-@Preview
-fun ConnectivityError() {
+fun ConnectivityError(message: String?) {
 
     ReposApp {
         Column(
@@ -38,7 +37,7 @@ fun ConnectivityError() {
 
             )
             Text(
-                text = stringResource(id = R.string.no_internet_connection_text),
+                text = message?: stringResource(id = R.string.no_internet_connection_text),
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.dimen_16_dp)),
                 style = MaterialTheme.typography.h5
             )

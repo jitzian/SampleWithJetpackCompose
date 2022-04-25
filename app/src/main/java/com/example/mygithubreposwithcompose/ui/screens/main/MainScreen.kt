@@ -1,5 +1,6 @@
 package com.example.mygithubreposwithcompose.ui.screens.main
 
+import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
@@ -25,20 +26,28 @@ fun MainScreenState(
     mainViewModel: MainViewModel = viewModel(),
     onRepoClick: (Int) -> Unit
 ) {
+    val TAG = "MainScreenState"
 
     val data by mainViewModel.data.collectAsState()
-    mainViewModel.getRepos("jitzian")
+    mainViewModel.getRepos(user = "jitian")
 
-    if (data.isError) {
-        ConnectivityError()
-    } else {
-        data.repos?.let {
+    when (data) {
+        is MainViewModel.UIState.SuccessState -> {
+            Log.e(TAG, "MainScreenState::SuccessState")
             MainScreen(
-                repos = it,
-                onRepoClick = onRepoClick
+                repos = (data as MainViewModel.UIState.SuccessState).repos,
+                onRepoClick
             )
         }
+
+        is MainViewModel.UIState.ErrorState -> {
+            Log.e(TAG, "MainScreenState::ErrorState")
+            ConnectivityError((data as MainViewModel.UIState.ErrorState).message)
+        }
+
+        is MainViewModel.UIState.EmptyState -> Unit
     }
+
 }
 
 
@@ -60,6 +69,7 @@ fun MainScreen(repos: List<ResultApiItem>, onRepoClick: (Int) -> Unit) {
                                 onRepoClick(safeRepoId)
                             }
                         )
+
                     }
                 }
             }

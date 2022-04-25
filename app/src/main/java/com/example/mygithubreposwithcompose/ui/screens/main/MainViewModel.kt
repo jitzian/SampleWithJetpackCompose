@@ -1,7 +1,6 @@
 package com.example.mygithubreposwithcompose.ui.screens.main
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mygithubreposwithcompose.constatns.GlobalConstants
@@ -27,8 +26,8 @@ class MainViewModel : ViewModel() {
     @Inject
     lateinit var retrofit: Retrofit
 
-    private val _data = MutableStateFlow(UIState())
-    val data = _data.asStateFlow()
+    private val _data = MutableStateFlow<UIState>(UIState.EmptyState)
+    var data = _data.asStateFlow()
 
     init {
         inject()
@@ -41,28 +40,33 @@ class MainViewModel : ViewModel() {
 
     fun getRepos(user: String) = viewModelScope.launch {
         //TODO: Refactor this in order to handle proper errors like no connectivity..
-        withContext(Dispatchers.IO) {
-            withTimeout(GlobalConstants.MAX_TIME_OUT) {
-                try {
-                    Log.e(TAG, "getRepos:: OK")
-                    _data.value = UIState(
-                        repos = restApi.getRepos(user),
-                        isError = false
-                    )
-                } catch (tce: TimeoutCancellationException) {
-                    Log.e(TAG, "getRepos::NOK::${tce.message}")
-                    _data.value = UIState(
-                        isError = true
-                    )
+        when (_data.value) {
+            is UIState.EmptyState -> {
+                withContext(Dispatchers.IO) {
+                    withTimeout(GlobalConstants.MAX_TIME_OUT) {
+                        try {
+                            val result = restApi.getRepos(user)
+
+                            if (result.isNotEmpty()) {
+                                _data.value = UIState.SuccessState(repos = result)
+                            } else {
+                                _data.value = UIState.ErrorState(message = "No data retrieved")
+                            }
+                        } catch (tce: TimeoutCancellationException) {
+                            Log.e(TAG, "getRepos::${tce.message}")
+                            _data.value =
+                                UIState.ErrorState(message = "An error occurred::${tce.message}")
+                        }
+                    }
                 }
             }
+            else -> Unit
         }
     }
 
-    //State that will be observed in the UI to display data
-    data class UIState(
-        val isError: Boolean = false,
-        val repos: List<ResultApiItem>? = null
-    )
-
+    sealed class UIState {
+        object EmptyState : UIState()
+        class SuccessState(val repos: List<ResultApiItem>) : UIState()
+        class ErrorState(val message: String) : UIState()
+    }
 }
