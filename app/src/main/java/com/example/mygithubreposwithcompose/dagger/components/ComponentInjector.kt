@@ -1,7 +1,7 @@
 package com.example.mygithubreposwithcompose.dagger.components
 
+import com.example.mygithubreposwithcompose.base.BaseViewModel
 import com.example.mygithubreposwithcompose.dagger.modules.NetworkModule
-import com.example.mygithubreposwithcompose.ui.screens.main.MainViewModel
 import dagger.Component
 
 @Component(
@@ -9,7 +9,7 @@ import dagger.Component
 )
 interface ComponentInjector {
 
-    fun inject(mainViewModel: MainViewModel)
+    fun inject(baseViewModel: BaseViewModel)
 
     @Component.Builder
     interface Builder {

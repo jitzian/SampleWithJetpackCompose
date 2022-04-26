@@ -3,6 +3,7 @@ package com.example.mygithubreposwithcompose.ui.screens.main
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mygithubreposwithcompose.base.BaseViewModel
 import com.example.mygithubreposwithcompose.constatns.GlobalConstants
 import com.example.mygithubreposwithcompose.dagger.components.DaggerComponentInjector
 import com.example.mygithubreposwithcompose.dagger.modules.NetworkModule
@@ -14,29 +15,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import retrofit2.Retrofit
 import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
-    private val TAG = MainViewModel::class.java.simpleName
+class MainViewModel : BaseViewModel() {
 
-    private val injector = DaggerComponentInjector.builder()
-        .networkModule(NetworkModule(baseURL = GlobalConstants.baseUrl))
-        .build()
-
-    private var restApi: RestApi
-
-    @Inject
-    lateinit var retrofit: Retrofit
+    init {
+        TAG = MainViewModel::class.java.simpleName
+    }
 
     private val _data = MutableStateFlow<UIState>(UIState.EmptyState)
     var data = _data.asStateFlow()
-
-    init {
-        inject()
-        restApi = retrofit.create(RestApi::class.java)
-    }
-
-    private fun inject() {
-        injector.inject(this)
-    }
 
     fun getRepos(user: String) = viewModelScope.launch {
         //TODO: Refactor this in order to handle proper errors like no connectivity..
