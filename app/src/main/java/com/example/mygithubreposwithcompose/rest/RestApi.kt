@@ -12,6 +12,6 @@ interface RestApi {
     @GET("repos/{user}/{id}")
     suspend fun getRepoDetailsById(
         @Path("user") user: String,
-        @Path("id") id: String
+        @Path("id") id: Int
     ): ResultApiItem?
 }

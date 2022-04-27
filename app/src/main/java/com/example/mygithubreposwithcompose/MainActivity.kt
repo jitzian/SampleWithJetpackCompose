@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.annotation.ExperimentalCoilApi
 import com.example.mygithubreposwithcompose.ui.app.ReposApp
+import com.example.mygithubreposwithcompose.ui.navigation.NavigationConfig
 import com.example.mygithubreposwithcompose.ui.screens.main.MainScreenState
 import com.example.mygithubreposwithcompose.ui.screens.main.MainViewModel
 import com.example.mygithubreposwithcompose.ui.theme.MyGithubReposWithComposeTheme
@@ -31,11 +32,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            ReposApp {
-                //Greeting("Android")asd
-                StateInputView()
-                MainScreenState(user = "josro0ck")
-            }
+            //Greeting("Android")asd
+            //StateInputView()
+            //MainScreenState(user = "josro0ck")
+            NavigationConfig()
+
         }
     }
 }

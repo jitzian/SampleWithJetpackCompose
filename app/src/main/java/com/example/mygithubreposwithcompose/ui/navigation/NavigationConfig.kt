@@ -8,7 +8,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
 import com.example.mygithubreposwithcompose.ui.screens.detail.DetailScreen
+import com.example.mygithubreposwithcompose.ui.screens.detail.DetailScreenState
 import com.example.mygithubreposwithcompose.ui.screens.main.MainScreenState
+import okhttp3.internal.userAgent
 
 
 @ExperimentalCoilApi
@@ -25,8 +27,15 @@ fun NavigationConfig() {
                 navController.navigate(NavItem.Detail.createNavRoute(repoId))
             }
         }
-        composable(NavItem.Detail) {
-            DetailScreen(
+        composable(NavItem.Detail) { backStackEntry ->
+//            DetailScreen(
+//                onUpClick = {
+//                    navController.navigateUp()
+//                }
+//            )
+            DetailScreenState(
+                user = backStackEntry.findArg(NavArg.User),
+                id = backStackEntry.findArg(NavArg.RepoId),
                 onUpClick = {
                     navController.navigateUp()
                 }

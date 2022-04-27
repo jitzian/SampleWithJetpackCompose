@@ -1,7 +1,6 @@
 package com.example.mygithubreposwithcompose.ui.screens.detail
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mygithubreposwithcompose.base.BaseViewModel
 import com.example.mygithubreposwithcompose.constatns.GlobalConstants
@@ -19,7 +18,7 @@ class DetailViewModel : BaseViewModel() {
     private val _data = MutableStateFlow<UIState>(UIState.Empty)
     var data = _data.asStateFlow()
 
-    fun getRepoDetailsById(user: String, id: String) = viewModelScope.launch {
+    fun getRepoDetailsById(user: String, id: Int) = viewModelScope.launch {
 
         when (_data.value) {
             is UIState.Empty -> {

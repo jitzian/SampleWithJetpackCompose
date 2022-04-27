@@ -8,5 +8,8 @@ class GlobalConstants {
         //Network
         const val MAX_TIME_OUT = 10000L
 
+        //Fallback variables
+        const val EMPTY_STRING = ""
+
     }
 }

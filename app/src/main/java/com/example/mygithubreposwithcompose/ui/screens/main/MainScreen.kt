@@ -29,7 +29,7 @@ fun MainScreenState(
     val TAG = "MainScreenState"
 
     val data by mainViewModel.data.collectAsState()
-    mainViewModel.getRepos(user = "jitian")
+    mainViewModel.getRepos(user = "jitzian")
 
     when (data) {
         is MainViewModel.UIState.SuccessState -> {

@@ -23,9 +23,12 @@ sealed class NavItem(
     object Main : NavItem("main")
     object Detail : NavItem("detail", listOf(NavArg.MediaId)) {
         fun createNavRoute(mediaId: Int) = "$baseRoute/$mediaId"
+        //fun createNavRoute(user: String, id: Int) = "$baseRoute/$user/$id"
     }
 }
 
 enum class NavArg(val key: String, val navType: NavType<*>) {
-    MediaId("mediaId", NavType.IntType)
+    MediaId("mediaId", NavType.IntType),
+    User("user", NavType.StringType),
+    RepoId("repoId", NavType.IntType)
 }
