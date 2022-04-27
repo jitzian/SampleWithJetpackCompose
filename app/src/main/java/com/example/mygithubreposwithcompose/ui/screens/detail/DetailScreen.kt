@@ -53,11 +53,10 @@ fun DetailScreenState(
 }
 
 @Composable
-//fun DetailScreen(onUpClick: () -> Unit) {
 fun DetailScreen(repo: ResultApiItem, onUpClick: () -> Unit) {
     ReposApp {
         Scaffold(
-            topBar = { MainAppBar() }
+            topBar = { MainAppBar(showBackButton = true) }
         ) {
             Box(
                 modifier = Modifier
