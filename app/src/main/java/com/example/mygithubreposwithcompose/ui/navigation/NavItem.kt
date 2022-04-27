@@ -5,7 +5,7 @@ import androidx.navigation.navArgument
 
 sealed class NavItem(
     val baseRoute: String,
-    val navArgs: List<NavArg> = emptyList()
+    private val navArgs: List<NavArg> = emptyList()
 ) {
     val route = run {
         //baseRoute/{arg1}/{arg2}
@@ -20,15 +20,13 @@ sealed class NavItem(
         navArgument(it.key) { type = it.navType }
     }
 
-    object Main : NavItem("main")
-    object Detail : NavItem("detail", listOf(NavArg.MediaId)) {
-        fun createNavRoute(mediaId: Int) = "$baseRoute/$mediaId"
-        //fun createNavRoute(user: String, id: Int) = "$baseRoute/$user/$id"
+    object Main : NavItem(AppDestinations.MAIN.name)
+    object Detail : NavItem(AppDestinations.DETAIL.name, listOf(NavArg.User, NavArg.RepoName)) {
+        fun createNavRoute(user: String, repoName: String) = "$baseRoute/$user/$repoName"
     }
 }
 
 enum class NavArg(val key: String, val navType: NavType<*>) {
-    MediaId("mediaId", NavType.IntType),
     User("user", NavType.StringType),
-    RepoId("repoId", NavType.IntType)
+    RepoName("repoName", NavType.StringType)
 }

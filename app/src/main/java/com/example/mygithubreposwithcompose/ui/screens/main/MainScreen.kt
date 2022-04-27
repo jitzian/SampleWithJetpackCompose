@@ -24,7 +24,7 @@ import com.example.mygithubreposwithcompose.ui.screens.error.ConnectivityError
 @Composable
 fun MainScreenState(
     mainViewModel: MainViewModel = viewModel(),
-    onRepoClick: (Int) -> Unit
+    onRepoClick: (String, String) -> Unit
 ) {
     val TAG = "MainScreenState"
 
@@ -50,10 +50,9 @@ fun MainScreenState(
 
 }
 
-
 @ExperimentalCoilApi
 @Composable
-fun MainScreen(repos: List<ResultApiItem>, onRepoClick: (Int) -> Unit) {
+fun MainScreen(repos: List<ResultApiItem>, onRepoClick: (String, String) -> Unit) {
     ReposApp {
         Scaffold(
             topBar = {
@@ -62,15 +61,10 @@ fun MainScreen(repos: List<ResultApiItem>, onRepoClick: (Int) -> Unit) {
         ) {
             LazyColumn {
                 items(repos) { item ->
-                    item.id?.let { safeRepoId ->
-                        ItemRow(
-                            data = item,
-                            onRepoClick = {
-                                onRepoClick(safeRepoId)
-                            }
-                        )
-
-                    }
+                    ItemRow(
+                        data = item,
+                        onRepoClick = onRepoClick
+                    )
                 }
             }
         }

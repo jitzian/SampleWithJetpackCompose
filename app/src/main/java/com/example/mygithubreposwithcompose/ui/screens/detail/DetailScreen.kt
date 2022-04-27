@@ -1,5 +1,7 @@
 package com.example.mygithubreposwithcompose.ui.screens.detail
 
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,16 +28,21 @@ import com.example.mygithubreposwithcompose.ui.screens.error.ConnectivityError
 fun DetailScreenState(
     detailViewModel: DetailViewModel = viewModel(),
     user: String,
-    id: Int,
+    repoName: String,
     onUpClick: () -> Unit
 ) {
+    val TAG = "DetailScreenState"
+    Log.e(TAG, "DetailScreenState::user::$user, repoName::$repoName")
 
     val data by detailViewModel.data.collectAsState()
-    detailViewModel.getRepoDetailsById(user, id)
+    detailViewModel.getRepoDetailsById(user = user, repoName = repoName)
 
     when (data) {
         is DetailViewModel.UIState.Success -> {
-            DetailScreen((data as DetailViewModel.UIState.Success).repo)
+            DetailScreen(
+                repo = (data as DetailViewModel.UIState.Success).repo,
+                onUpClick = onUpClick
+            )
         }
         is DetailViewModel.UIState.Error -> {
             ConnectivityError(message = stringResource(id = R.string.no_data_retrieved_text))
@@ -47,7 +54,7 @@ fun DetailScreenState(
 
 @Composable
 //fun DetailScreen(onUpClick: () -> Unit) {
-fun DetailScreen(repo: ResultApiItem) {
+fun DetailScreen(repo: ResultApiItem, onUpClick: () -> Unit) {
     ReposApp {
         Scaffold(
             topBar = { MainAppBar() }
@@ -55,17 +62,15 @@ fun DetailScreen(repo: ResultApiItem) {
             Box(
                 modifier = Modifier
                     .padding(dimensionResource(id = R.dimen.dimen_16_dp))
-                //.clickable(onClick = onUpClick)
+                    .clickable(onClick = onUpClick)
             ) {
                 Column {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
-                        //text = "Title", style = MaterialTheme.typography.subtitle1
                         text = repo.name ?: EMPTY_STRING, style = MaterialTheme.typography.subtitle1
                     )
 
                     Text(
-                        //text = stringResource(id = R.string.loremIpsum),
                         text = repo.description ?: stringResource(id = R.string.loremIpsum),
                         modifier = Modifier.padding(
                             top = 8.dp

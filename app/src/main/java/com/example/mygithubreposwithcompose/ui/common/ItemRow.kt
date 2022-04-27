@@ -12,18 +12,23 @@ import androidx.compose.ui.res.dimensionResource
 import coil.annotation.ExperimentalCoilApi
 import com.example.mygithubreposwithcompose.R
 import com.example.mygithubreposwithcompose.rest.model.ResultApiItem
+import com.example.mygithubreposwithcompose.utils.safeLet
 import java.util.*
 
 @ExperimentalCoilApi
 @Composable
-fun ItemRow(data: ResultApiItem, onRepoClick: (Int) -> Unit) {
+fun ItemRow(data: ResultApiItem, onRepoClick: (String, String) -> Unit) {
+    val TAG = "ItemRow"
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(dimensionResource(id = R.dimen.dimen_8_dp))
             .clickable {
                 Log.e("ItemRow", "ItemRow: ")
-                onRepoClick.invoke(data.id!!)
+                safeLet(data.owner, data.owner?.login, data.name) { _, user, repoName ->
+                    Log.e(TAG, "ItemRow: user: $user, repoId: $repoName")
+                    onRepoClick(user, repoName)
+                }
             },
         elevation = dimensionResource(id = R.dimen.dimen_4_dp)
     ) {

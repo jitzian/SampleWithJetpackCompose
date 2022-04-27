@@ -18,14 +18,14 @@ class DetailViewModel : BaseViewModel() {
     private val _data = MutableStateFlow<UIState>(UIState.Empty)
     var data = _data.asStateFlow()
 
-    fun getRepoDetailsById(user: String, id: Int) = viewModelScope.launch {
+    fun getRepoDetailsById(user: String, repoName: String) = viewModelScope.launch {
 
         when (_data.value) {
             is UIState.Empty -> {
                 withContext(Dispatchers.IO) {
                     withTimeout(GlobalConstants.MAX_TIME_OUT) {
                         try {
-                            val repo = restApi.getRepoDetailsById(user, id)
+                            val repo = restApi.getRepoDetailsById(user, repoName)
                             if (repo == null) {
                                 _data.value = UIState.Error("No data retrieved")
                             } else {
