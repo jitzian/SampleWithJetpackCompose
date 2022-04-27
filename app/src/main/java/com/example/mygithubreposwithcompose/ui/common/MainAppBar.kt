@@ -9,7 +9,8 @@ import com.example.mygithubreposwithcompose.R
 @Composable
 fun MainAppBar(
     title: String = stringResource(id = R.string.title_app_name),
-    showBackButton: Boolean = false
+    showBackButton: Boolean = false,
+    onUpClick: (() -> Unit)? = null
 ) {
     if (showBackButton) {
         TopAppBar(
@@ -17,7 +18,7 @@ fun MainAppBar(
                 Text(text = title)
             },
             navigationIcon = {
-                ArrowBackIcon(showBackButton)
+                ArrowBackIcon(showBackButton, onUpClick)
             }
         )
     } else {

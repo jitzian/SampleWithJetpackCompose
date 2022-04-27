@@ -9,13 +9,18 @@ import androidx.compose.ui.res.stringResource
 import com.example.mygithubreposwithcompose.R
 
 @Composable
-fun ArrowBackIcon(showBackButton: Boolean = false) {
+fun ArrowBackIcon(
+    showBackButton: Boolean = false,
+    onUpClick: (() -> Unit)? = null
+) {
     if (showBackButton) {
-        IconButton(onClick = { /*onClick()*/ }) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = stringResource(id = R.string.go_to_previous_screen)
-            )
+        onUpClick?.let {
+            IconButton(onClick = it) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = stringResource(id = R.string.go_to_previous_screen)
+                )
+            }
         }
     }
 }
