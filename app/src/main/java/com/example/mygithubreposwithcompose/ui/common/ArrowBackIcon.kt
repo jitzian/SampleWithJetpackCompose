@@ -18,7 +18,7 @@ fun ArrowBackIcon(
             IconButton(onClick = it) {
                 Icon(
                     imageVector = Icons.Default.ArrowBack,
-                    contentDescription = stringResource(id = R.string.go_to_previous_screen)
+                    contentDescription = stringResource(id = R.string.go_to_previous_screen_text)
                 )
             }
         }

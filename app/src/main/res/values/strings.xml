@@ -6,5 +6,6 @@
 Justo laoreet sit amet cursus sit. Vel facilisis volutpat est velit egestas dui id ornare arcu. Aliquet sagittis id consectetur purus ut. Consequat nisl vel pretium lectus quam. Gravida quis blandit turpis cursus in hac habitasse platea. Dignissim cras tincidunt lobortis feugiat vivamus at. Volutpat est velit egestas dui id ornare. Accumsan lacus vel facilisis volutpat est velit egestas dui id. Velit euismod in pellentesque massa placerat duis ultricies lacus sed. Non blandit massa enim nec dui nunc mattis enim. Tortor dignissim convallis aenean et tortor at risus viverra adipiscing. Non nisi est sit amet facilisis.</string>
     <string name="no_internet_connection_text">No Internet Connection</string>
     <string name="no_data_retrieved_text">No data retrieved</string>
-    <string name="go_to_previous_screen">Go to previous screen</string>
+    <string name="go_to_previous_screen_text">Go to previous screen</string>
+    <string name="more_options_text">More Options</string>
 </resources>

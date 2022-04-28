@@ -56,7 +56,7 @@ fun DetailScreenState(
 fun DetailScreen(repo: ResultApiItem, onUpClick: () -> Unit) {
     ReposApp {
         Scaffold(
-            topBar = { MainAppBar(showBackButton = true, onUpClick = onUpClick) }
+            topBar = { MainAppBar(showBackButton = true, onUpClick = onUpClick, showMore = true) }
         ) {
             Box(
                 modifier = Modifier
