@@ -3,6 +3,7 @@ package com.example.mygithubreposwithcompose.ui.screens.main
 import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -20,6 +21,7 @@ import com.example.mygithubreposwithcompose.ui.screens.error.ConnectivityError
  * https://www.waseefakhtar.com/android/recyclerview-in-jetpack-compose/
  * */
 
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
 @Composable
 fun MainScreenState(
@@ -50,6 +52,7 @@ fun MainScreenState(
 
 }
 
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
 @Composable
 fun MainScreen(repos: List<ResultApiItem>, onRepoClick: (String, String) -> Unit) {

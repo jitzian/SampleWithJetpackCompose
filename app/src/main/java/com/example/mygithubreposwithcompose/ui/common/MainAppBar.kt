@@ -1,28 +1,27 @@
 package com.example.mygithubreposwithcompose.ui.common
 
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.example.mygithubreposwithcompose.R
 
-@OptIn(ExperimentalMaterialApi::class)
+@ExperimentalMaterialApi
 @Composable
 fun MainAppBar(
     title: String = stringResource(id = R.string.title_app_name),
     showBackButton: Boolean = false,
     showMore: Boolean = false,
+    menuOptions: List<String>? = null,
     onUpClick: (() -> Unit)? = null
 ) {
 
-    val listOfMenu = listOf("Option 1", "Option 2", "Option 3")
-    var showMenu by rememberSaveable {
-        mutableStateOf(false)
+    val showMenu by rememberSaveable {
+        mutableStateOf(showMore)
     }
 
     if (showBackButton) {
@@ -34,24 +33,12 @@ fun MainAppBar(
                 ArrowBackIcon(showBackButton, onUpClick)
             },
             actions = {
-                if (showMore) {
-                    IconButton(onClick = {
-                        showMenu = !showMenu
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.MoreVert,
-                            contentDescription = stringResource(
-                                id = R.string.more_options_text
-                            )
+                if (!menuOptions.isNullOrEmpty()) {
+                    if (showMore) {
+                        CustomDropDownMenuState(
+                            menuOptions = menuOptions,
+                            showMore = showMenu
                         )
-                        DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
-                            listOfMenu.forEach { option ->
-                                DropdownMenuItem(onClick = { showMenu = false }) {
-                                    ListItem(text = { Text(text = option) })
-                                }
-                            }
-
-                        }
                     }
                 }
             }

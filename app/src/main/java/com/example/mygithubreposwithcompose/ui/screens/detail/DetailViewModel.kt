@@ -18,6 +18,12 @@ class DetailViewModel : BaseViewModel() {
     private val _data = MutableStateFlow<UIState>(UIState.Empty)
     var data = _data.asStateFlow()
 
+    private val menuOptions = mutableListOf(
+        "Option 1",
+        "Option 2",
+        "Option 3"
+    )
+
     fun getRepoDetailsById(user: String, repoName: String) = viewModelScope.launch {
 
         when (_data.value) {
@@ -29,7 +35,11 @@ class DetailViewModel : BaseViewModel() {
                             if (repo == null) {
                                 _data.value = UIState.Error("No data retrieved")
                             } else {
-                                _data.value = UIState.Success(repo)
+                                _data.value = UIState.Success(
+                                    repo = repo,
+                                    showMenu = true,
+                                    menuOptions = menuOptions
+                                )
                             }
                         } catch (tce: TimeoutCancellationException) {
                             Log.e(TAG, "getRepoDetailsById::${tce.message}")
@@ -43,7 +53,12 @@ class DetailViewModel : BaseViewModel() {
 
     sealed class UIState {
         object Empty : UIState()
-        class Success(val repo: ResultApiItem) : UIState()
+        class Success(
+            val repo: ResultApiItem,
+            val showMenu: Boolean = false,
+            val menuOptions: List<String>? = null,
+        ) : UIState()
+
         class Error(val msg: String) : UIState()
     }
 

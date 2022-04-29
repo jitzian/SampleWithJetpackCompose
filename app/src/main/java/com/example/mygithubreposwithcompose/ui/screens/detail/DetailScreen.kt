@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -24,6 +25,7 @@ import com.example.mygithubreposwithcompose.ui.app.ReposApp
 import com.example.mygithubreposwithcompose.ui.common.MainAppBar
 import com.example.mygithubreposwithcompose.ui.screens.error.ConnectivityError
 
+@ExperimentalMaterialApi
 @Composable
 fun DetailScreenState(
     detailViewModel: DetailViewModel = viewModel(),
@@ -41,6 +43,7 @@ fun DetailScreenState(
         is DetailViewModel.UIState.Success -> {
             DetailScreen(
                 repo = (data as DetailViewModel.UIState.Success).repo,
+                menuOptions = (data as DetailViewModel.UIState.Success).menuOptions,
                 onUpClick = onUpClick
             )
         }
@@ -52,11 +55,21 @@ fun DetailScreenState(
 
 }
 
+@ExperimentalMaterialApi
 @Composable
-fun DetailScreen(repo: ResultApiItem, onUpClick: () -> Unit) {
+fun DetailScreen(repo: ResultApiItem,
+                 menuOptions: List<String>? = null,
+                 onUpClick: () -> Unit) {
     ReposApp {
         Scaffold(
-            topBar = { MainAppBar(showBackButton = true, onUpClick = onUpClick, showMore = true) }
+            topBar = {
+                MainAppBar(
+                    showBackButton = true,
+                    onUpClick = onUpClick,
+                    showMore = true,
+                    menuOptions = menuOptions
+                )
+            }
         ) {
             Box(
                 modifier = Modifier
