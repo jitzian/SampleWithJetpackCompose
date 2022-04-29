@@ -4,6 +4,10 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import com.example.mygithubreposwithcompose.R
 
@@ -17,7 +21,9 @@ fun MainAppBar(
 ) {
 
     val listOfMenu = listOf("Option 1", "Option 2", "Option 3")
-
+    var showMenu by rememberSaveable {
+        mutableStateOf(false)
+    }
 
     if (showBackButton) {
         TopAppBar(
@@ -29,16 +35,18 @@ fun MainAppBar(
             },
             actions = {
                 if (showMore) {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(onClick = {
+                        showMenu = !showMenu
+                    }) {
                         Icon(
                             imageVector = Icons.Default.MoreVert,
                             contentDescription = stringResource(
                                 id = R.string.more_options_text
                             )
                         )
-                        DropdownMenu(expanded = true, onDismissRequest = { /*TODO*/ }) {
+                        DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
                             listOfMenu.forEach { option ->
-                                DropdownMenuItem(onClick = { /*TODO*/ }) {
+                                DropdownMenuItem(onClick = { showMenu = false }) {
                                     ListItem(text = { Text(text = option) })
                                 }
                             }
