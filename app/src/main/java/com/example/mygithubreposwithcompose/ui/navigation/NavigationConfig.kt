@@ -1,5 +1,6 @@
 package com.example.mygithubreposwithcompose.ui.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
@@ -10,6 +11,7 @@ import coil.annotation.ExperimentalCoilApi
 import com.example.mygithubreposwithcompose.ui.screens.detail.DetailScreenState
 import com.example.mygithubreposwithcompose.ui.screens.main.MainScreenState
 
+@ExperimentalMaterialApi
 @ExperimentalCoilApi
 @Composable
 //TODO: Rename this...
