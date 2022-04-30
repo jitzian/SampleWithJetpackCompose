@@ -63,6 +63,7 @@ fun DetailScreen(
     ReposApp {
         CharacterDetailScaffold(
             menuOptions = menuOptions,
+            repo = repo,
             onUpClick = onUpClick
         ) {
             Box(
