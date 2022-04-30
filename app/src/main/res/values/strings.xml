@@ -8,4 +8,5 @@ Justo laoreet sit amet cursus sit. Vel facilisis volutpat est velit egestas dui 
     <string name="no_data_retrieved_text">No data retrieved</string>
     <string name="go_to_previous_screen_text">Go to previous screen</string>
     <string name="more_options_text">More Options</string>
+    <string name="share_repo_text">Share Repository</string>
 </resources>

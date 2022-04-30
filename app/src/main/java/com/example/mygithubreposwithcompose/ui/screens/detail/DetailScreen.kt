@@ -6,10 +6,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -52,24 +51,19 @@ fun DetailScreenState(
         }
         is DetailViewModel.UIState.Empty -> Unit
     }
-
 }
 
 @ExperimentalMaterialApi
 @Composable
-fun DetailScreen(repo: ResultApiItem,
-                 menuOptions: List<String>? = null,
-                 onUpClick: () -> Unit) {
+fun DetailScreen(
+    repo: ResultApiItem,
+    menuOptions: List<String>? = null,
+    onUpClick: () -> Unit
+) {
     ReposApp {
-        Scaffold(
-            topBar = {
-                MainAppBar(
-                    showBackButton = true,
-                    onUpClick = onUpClick,
-                    showMore = true,
-                    menuOptions = menuOptions
-                )
-            }
+        CharacterDetailScaffold(
+            menuOptions = menuOptions,
+            onUpClick = onUpClick
         ) {
             Box(
                 modifier = Modifier
