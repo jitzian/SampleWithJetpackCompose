@@ -145,7 +145,7 @@ data class ResultApiItem(
     @SerializedName("teams_url")
     val teamsUrl: String?,
     @SerializedName("topics")
-    val topics: List<Any>?,
+    val topics: List<String>?,
     @SerializedName("trees_url")
     val treesUrl: String?,
     @SerializedName("updated_at")

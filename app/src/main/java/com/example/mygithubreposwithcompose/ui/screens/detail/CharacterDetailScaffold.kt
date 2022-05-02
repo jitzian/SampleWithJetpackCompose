@@ -28,7 +28,8 @@ fun CharacterDetailScaffold(
                 showBackButton = true,
                 onUpClick = onUpClick,
                 showMore = true,
-                menuOptions = menuOptions
+                //menuOptions = menuOptions
+                menuOptions = repo.topics
             )
         },
         floatingActionButton = {
