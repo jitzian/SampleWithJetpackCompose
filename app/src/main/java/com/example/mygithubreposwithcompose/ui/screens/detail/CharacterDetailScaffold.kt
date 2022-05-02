@@ -32,16 +32,18 @@ fun CharacterDetailScaffold(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                shareRepository(
-                    context = context,
-                    repo = repo
-                )
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Share,
-                    contentDescription = stringResource(id = R.string.share_repo_text)
-                )
+            if (!repo.htmlUrl.isNullOrEmpty()) {
+                FloatingActionButton(onClick = {
+                    shareRepository(
+                        context = context,
+                        repo = repo
+                    )
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.Share,
+                        contentDescription = stringResource(id = R.string.share_repo_text)
+                    )
+                }
             }
         },
         floatingActionButtonPosition = FabPosition.End,
