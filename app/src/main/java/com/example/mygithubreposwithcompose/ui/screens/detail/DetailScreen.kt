@@ -1,14 +1,13 @@
 package com.example.mygithubreposwithcompose.ui.screens.detail
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,7 +20,6 @@ import com.example.mygithubreposwithcompose.R
 import com.example.mygithubreposwithcompose.constatns.GlobalConstants.Companion.EMPTY_STRING
 import com.example.mygithubreposwithcompose.rest.model.ResultApiItem
 import com.example.mygithubreposwithcompose.ui.app.ReposApp
-import com.example.mygithubreposwithcompose.ui.common.MainAppBar
 import com.example.mygithubreposwithcompose.ui.screens.error.ConnectivityError
 
 @ExperimentalMaterialApi
@@ -32,8 +30,6 @@ fun DetailScreenState(
     repoName: String,
     onUpClick: () -> Unit
 ) {
-    val TAG = "DetailScreenState"
-    Log.e(TAG, "DetailScreenState::user::$user, repoName::$repoName")
 
     val data by detailViewModel.data.collectAsState()
     detailViewModel.getRepoDetailsById(user = user, repoName = repoName)
